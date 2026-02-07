@@ -4,21 +4,27 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.FreeBreakfast
 import androidx.compose.material.icons.filled.Icecream
 import androidx.compose.material.icons.filled.RiceBowl
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -39,6 +45,7 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.medicen.presentation.components.CustomSearchBar
 import com.example.medicen.presentation.components.InventoryItem
 import com.example.medicen.ui.theme.backgroundColor
 
@@ -52,15 +59,15 @@ import com.example.medicen.ui.theme.secondaryColor
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InventoryScreen() {
-
-
-    var text by remember { mutableStateOf("") }
-
+    
+    val filters = listOf("Todos","Por caducar","Caducados","Lácteos", "Frutas", "Verduras", "Bebidas")
+    var selectedFilter by remember { mutableStateOf("Todos") }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(backgroundColor)
+            .background(backgroundColor),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Row(
             Modifier
@@ -82,38 +89,58 @@ fun InventoryScreen() {
         }
 
 
-        // Contenedor principal de la búsqueda
-        SearchBar(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            expanded = false,
-            onExpandedChange = { },
-            inputField = {
-                SearchBarDefaults.InputField(
-                    query = text,
-                    onQueryChange = { text = it },
-                    onSearch = {},
-                    expanded = false,
-                    onExpandedChange = {},
-                    placeholder = { Text("Buscar en el inventario", color = Color.Gray) },
-                    leadingIcon = { Icon(Icons.Default.Search, contentDescription = null, tint = Color.Black) },
-                    trailingIcon = {
-                        if (text.isNotEmpty()) {
-                            IconButton(onClick = { text = "" }) {
-                                Icon(Icons.Default.Clear, contentDescription = null)
-                            }
-                        }
-                    }
-                )
-            },
-            colors = SearchBarDefaults.colors(containerColor = Color.White),
-            shape = RoundedCornerShape(16.dp)
-        ) {}
 
-        Text("DESPENSA (12)", color = Color.Black, fontSize = 16.sp, modifier = Modifier.padding(20.dp ))
+        // Contenedor principal de la búsqueda
+        CustomSearchBar("Buscar en el inventario")
+
+
+        LazyRow(
+            modifier = Modifier.fillMaxWidth()
+                .padding(horizontal = 20.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            item {
+                filters.forEach { filter ->
+                    FilterChip(
+                        modifier = Modifier.padding(horizontal = 5.dp),
+                        selected = (filter == selectedFilter),
+                        onClick = {selectedFilter = filter},
+                        label = {Text(filter)},
+                        leadingIcon = {
+                            if(filter == selectedFilter){
+                                Icon(
+                                    imageVector = Icons.Default.Check,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(FilterChipDefaults.IconSize)
+                                )
+                            }
+                        },
+                        colors = FilterChipDefaults.filterChipColors(
+                            selectedContainerColor = primaryColor,
+                            labelColor = Color.Black,
+                            selectedLabelColor = Color.White,
+                            containerColor = Color.White,
+                            selectedLeadingIconColor = Color.White,
+                            disabledContainerColor = Color.White,
+
+                        ),
+                        border = FilterChipDefaults.filterChipBorder(
+                            enabled = false,
+                            selected = false
+                        ),
+                        elevation = FilterChipDefaults.elevatedFilterChipElevation(
+                            elevation = 8.dp,
+                            focusedElevation = 1.dp
+                        ),
+                        shape = RoundedCornerShape(12.dp)
+                    )
+                }
+            }
+        }
+
+        Text("DESPENSA (12)", color = Color.Black, fontSize = 16.sp, modifier = Modifier.padding(start = 20.dp ), fontWeight = FontWeight.Medium)
         LazyColumn(modifier = Modifier.padding(20.dp)) {
-            items(3){
+            items(1){
                 InventoryItem("Arroz Integral","Caduca: 20 Nov", colorExpire = primaryColor, icon = Icons.Default.RiceBowl)
                 InventoryItem("Cafe de Grano","Consumir pronto", colorExpire = secondaryColor, icon = Icons.Default.FreeBreakfast)
                 InventoryItem("Helado de Litro","Caduca: Mañana", colorExpire = expireColor, icon = Icons.Default.Icecream)

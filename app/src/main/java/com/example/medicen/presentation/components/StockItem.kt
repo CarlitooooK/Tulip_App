@@ -31,6 +31,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.medicen.ui.theme.primaryColor
 
 @Composable
 fun StockItem(title: String, expireDate: String, colorExpire: Color, icon: ImageVector) {
@@ -40,7 +41,7 @@ fun StockItem(title: String, expireDate: String, colorExpire: Color, icon: Image
             .shadow(
                 elevation = 6.dp,
                 shape = RoundedCornerShape(12.dp),
-                spotColor = Color.Black
+                spotColor = primaryColor
             )
             .background(
                 color = Color.White,

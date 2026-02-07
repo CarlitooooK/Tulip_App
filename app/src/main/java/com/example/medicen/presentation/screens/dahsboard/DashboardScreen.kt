@@ -69,7 +69,7 @@ fun DashboardScreen(modifier: Modifier = Modifier) {
                 label = "Total Articulos",
                 count = "45",
                 icon = Icons.Default.Inventory,
-                iconColor = Color(0xFF2196F3)
+                iconColor = primaryColor
             )
             CustomCard(
                 label = "Caducan Pronto",
@@ -103,7 +103,7 @@ fun DashboardScreen(modifier: Modifier = Modifier) {
         )
         LazyColumn(Modifier.padding(20.dp)) {
             items(2){
-                StockItem("Huevos","Quedan: 2 Unidades", Color.Black, Icons.Default.Egg)
+                StockItem("Huevos","Quedan: 2 Unidades", Color.Gray, Icons.Default.Egg)
             }
         }
 

@@ -1,4 +1,4 @@
-package com.example.medicen.presentation.screens.Profile
+package com.example.medicen.presentation.screens.profile
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

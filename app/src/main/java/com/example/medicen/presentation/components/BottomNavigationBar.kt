@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -26,6 +27,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.medicen.presentation.navigation.bottomNavItem
 import com.example.medicen.ui.theme.backgroundColor
+import com.example.medicen.ui.theme.primaryColor
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
@@ -56,12 +58,12 @@ fun BottomNavigationBar(navController: NavController) {
             bottomNavItem.forEach { item ->
                 val isSelected = currentRoute == item.route
 
-                androidx.compose.foundation.layout.Column(
+                Column(
                     modifier = Modifier
-                        .width(70.dp)
-                        .height(60.dp)
+                        .width(80.dp)
+                        .height(50.dp)
                         .background(
-                            color = if (isSelected) Color.Black else Color.Transparent,
+                            color = if (isSelected) primaryColor else Color.Transparent,
                             shape = RoundedCornerShape(16.dp)
                         )
                         .clickable {
@@ -86,15 +88,6 @@ fun BottomNavigationBar(navController: NavController) {
                         tint = if (isSelected) Color.White else Color.Black.copy(alpha = 0.5f)
                     )
 
-                    if (isSelected) {
-                        Text(
-                            text = item.title,
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            color = Color.White,
-                            modifier = Modifier.padding(top = 4.dp)
-                        )
-                    }
                 }
             }
         }

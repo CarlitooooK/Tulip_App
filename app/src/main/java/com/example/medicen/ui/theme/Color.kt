@@ -11,13 +11,15 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 //Custom colors
-val primaryColor = Color(0xFFE3B832)
+val primaryColor = Color(0xFF2C4C47)
 val backgroundColor = Color(0xFFF5F4EE)
 
 
-val secondaryColor = Color(0xFFF9913C)
+val secondaryColor = Color(0xFFC0400C)
 val expireColor = Color(0xFFED4343)
 val expireSoonColor = Color(0xFFF77216)
+
+val greenBold = Color(0xFF02710A)
 
 
 

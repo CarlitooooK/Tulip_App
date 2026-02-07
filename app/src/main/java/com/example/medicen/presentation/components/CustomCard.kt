@@ -42,7 +42,7 @@ fun CustomCard(
             .shadow(
                 elevation = 6.dp,
                 shape = RoundedCornerShape(16.dp),
-                spotColor = Color.Black
+                spotColor = iconColor
             )
             .background(
                 color = Color.White,
