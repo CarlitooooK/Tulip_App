@@ -41,7 +41,11 @@ import com.example.medicen.ui.theme.backgroundColor
 import com.example.medicen.ui.theme.primaryColor
 
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier, onLoginSuccess:()-> Unit = {}, onNavigateToRegister:()-> Unit= {}) {
+fun LoginScreen(
+    modifier: Modifier = Modifier,
+    onLoginSuccess: () -> Unit = {},
+    onNavigateToRegister: () -> Unit = {}
+) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -94,28 +98,42 @@ fun LoginScreen(modifier: Modifier = Modifier, onLoginSuccess:()-> Unit = {}, on
         Text(
             "Correo Electronico",
             modifier = Modifier
-                .padding(start = 30.dp, top = 40.dp)
+                .padding(start = 20.dp, top = 40.dp)
                 .fillMaxWidth(),
             fontSize = 16.sp,
             color = Color.Black
         )
-        Box(modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp)) {
 
-            CustomTextField(value = email,{email=it}, placeholder = "Correo Electronico", icon = Icons.Filled.Email)
-        }
+
+        CustomTextField(
+            value = email,
+            { email = it },
+            placeholder = "Correo Electronico",
+            icon = Icons.Filled.Email,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp, vertical = 10.dp)
+        )
+
 
         Text(
             "Contraseña",
             modifier = Modifier
-                .padding(start = 30.dp, top = 10.dp)
+                .padding(start = 20.dp, top = 10.dp)
                 .fillMaxWidth(),
             fontSize = 16.sp,
             color = Color.Black
         )
 
-        Box(modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp)) {
-            CustomTextField(value = password,{ password = it },"Minimo 8 caracteres", icon = Icons.Filled.Password)
-        }
+
+        CustomTextField(
+            value = password,
+            { password = it },
+            "Minimo 8 caracteres",
+            icon = Icons.Filled.Password,
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 10.dp)
+        )
+
 
         Text(
             "¿Olvidaste tu contraseña?",
@@ -130,7 +148,7 @@ fun LoginScreen(modifier: Modifier = Modifier, onLoginSuccess:()-> Unit = {}, on
         )
 
         Button(
-            onClick = {onLoginSuccess()},
+            onClick = { onLoginSuccess() },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(30.dp)
@@ -138,12 +156,14 @@ fun LoginScreen(modifier: Modifier = Modifier, onLoginSuccess:()-> Unit = {}, on
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.outlinedButtonColors(
                 containerColor = primaryColor,
+                disabledContainerColor = Color.Gray
 
-                )
+                ),
+            enabled = !password.isEmpty() && !email.isEmpty()
         ) {
             Text(
                 "Iniciar Sesion",
-                color = Color.Black,
+                color = Color.White,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -157,9 +177,15 @@ fun LoginScreen(modifier: Modifier = Modifier, onLoginSuccess:()-> Unit = {}, on
         ) {
             Text("¿No tienes cuenta?", color = Color.Black)
             Spacer(Modifier.width(10.dp))
-            Text("Registrate", color = primaryColor, textDecoration = TextDecoration.Underline, modifier = Modifier.clickable(
-                onClick = onNavigateToRegister
-            ), fontWeight = FontWeight.Bold)
+            Text(
+                "Registrate",
+                color = primaryColor,
+                textDecoration = TextDecoration.Underline,
+                modifier = Modifier.clickable(
+                    onClick = onNavigateToRegister
+                ),
+                fontWeight = FontWeight.Bold
+            )
 
         }
 

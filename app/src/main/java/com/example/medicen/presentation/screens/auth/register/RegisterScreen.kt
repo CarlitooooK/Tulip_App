@@ -1,7 +1,6 @@
 package com.example.medicen.presentation.screens.auth.register
 
 
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -52,9 +51,14 @@ import com.example.medicen.ui.theme.backgroundColor
 import com.example.medicen.ui.theme.primaryColor
 
 @Composable
-fun RegisterScreen(modifier: Modifier = Modifier, onRegisterSuccess:()-> Unit = {}, onNavigateToLogin:()-> Unit = {}) {
+fun RegisterScreen(
+    modifier: Modifier = Modifier,
+    onRegisterSuccess: () -> Unit = {},
+    onNavigateToLogin: () -> Unit = {}
+) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf("") }
 
     Column(
         modifier = modifier
@@ -98,48 +102,72 @@ fun RegisterScreen(modifier: Modifier = Modifier, onRegisterSuccess:()-> Unit = 
             fontSize = 14.sp,
             textAlign = TextAlign.Center,
             color = Color.Gray,
-            modifier = Modifier.padding(10.dp)
+            modifier = Modifier.padding(vertical = 20.dp)
 
         )
 
         Text(
             "Nombre",
             modifier = Modifier
-                .padding(start = 40.dp, top = 20.dp)
+                .padding(start = 20.dp)
                 .fillMaxWidth(),
             fontSize = 16.sp,
             color = Color.Black
         )
-        Box(modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 10.dp)) {
 
-            CustomTextField(value = email,{email=it}, placeholder = "Tu nombre completo", icon = Icons.Filled.Email)
-        }
+
+        CustomTextField(
+            value = name,
+            { name = it },
+            placeholder = "Tu nombre completo",
+            icon = Icons.Filled.Email,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp, vertical = 14.dp)
+        )
+
 
         Text(
             "Correo Electronico",
             modifier = Modifier
-                .padding(start = 40.dp, top = 10.dp)
+                .padding(start = 20.dp)
                 .fillMaxWidth(),
             fontSize = 16.sp,
             color = Color.Black
         )
-        Box(modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 10.dp)) {
 
-            CustomTextField(value = email,{email=it}, placeholder = "Correo Electronico", icon = Icons.Filled.Email)
-        }
+
+        CustomTextField(
+            value = email,
+            { email = it },
+            placeholder = "Correo Electronico",
+            icon = Icons.Filled.Email,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp, vertical = 10.dp)
+        )
+
 
         Text(
             "Contraseña",
             modifier = Modifier
-                .padding(start = 40.dp, top = 10.dp)
+                .padding(start = 20.dp)
                 .fillMaxWidth(),
             fontSize = 16.sp,
             color = Color.Black
         )
 
-        Box(modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 10.dp)) {
-            CustomTextField(value = password,{ password = it },"Minimo 8 caracteres", icon = Icons.Filled.Password)
-        }
+
+        CustomTextField(
+            value = password,
+            { password = it },
+            "Minimo 8 caracteres",
+            icon = Icons.Filled.Password,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp, vertical = 10.dp)
+        )
+
 
 
 
@@ -152,8 +180,11 @@ fun RegisterScreen(modifier: Modifier = Modifier, onRegisterSuccess:()-> Unit = 
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.outlinedButtonColors(
                 containerColor = primaryColor,
+                disabledContainerColor = Color.Gray,
 
-                )
+
+                ),
+            enabled = !email.isEmpty() && !password.isEmpty() && !name.isEmpty()
         ) {
             Text(
                 "Registrarse",
@@ -169,11 +200,17 @@ fun RegisterScreen(modifier: Modifier = Modifier, onRegisterSuccess:()-> Unit = 
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text("¿Ya tienes cuenta?", color = Color.Black, )
+            Text("¿Ya tienes cuenta?", color = Color.Black)
             Spacer(Modifier.width(10.dp))
-            Text("Inicia Sesion", color = primaryColor, textDecoration = TextDecoration.Underline, fontWeight = FontWeight.Bold, modifier = Modifier.clickable(
-                onClick = onNavigateToLogin
-            ))
+            Text(
+                "Inicia Sesion",
+                color = primaryColor,
+                textDecoration = TextDecoration.Underline,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.clickable(
+                    onClick = onNavigateToLogin
+                )
+            )
         }
 
 

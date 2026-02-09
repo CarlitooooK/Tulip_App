@@ -28,6 +28,9 @@ fun CustomTextField(value: String, onValueChanger: (String) -> Unit,placeholder:
             focusedContainerColor = Color.White,
             unfocusedContainerColor = Color.White,
             focusedTextColor = Color.Black,
+            cursorColor = Color.Black,
+            unfocusedTextColor = Color.Black,
+            focusedIndicatorColor = Color.Black
         ),
         shape = RoundedCornerShape(8.dp)
     )
