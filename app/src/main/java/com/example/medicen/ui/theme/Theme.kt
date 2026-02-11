@@ -52,7 +52,7 @@ fun MedicenTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = Typographys,
         content = content
     )
 }

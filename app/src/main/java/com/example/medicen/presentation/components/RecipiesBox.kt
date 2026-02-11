@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.medicen.ui.theme.ParkLane
 import com.example.medicen.ui.theme.Purple40
 import com.example.medicen.ui.theme.Purple80
 import com.example.medicen.ui.theme.greenBold
@@ -50,7 +51,8 @@ fun RecipiesBox() {
         Text(
             "Pasta al Pesto",
             color = Color.Black,
-            fontSize = 18.sp,
+            fontSize = 22.sp,
+            fontFamily = ParkLane,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(horizontal = 5.dp)
         )
@@ -74,8 +76,7 @@ fun RecipiesBox() {
             Text(
                 "Pruebalo\n¡Listo para cocinar!",
                 color = greenBold,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
+                fontSize = 14.sp,
                 modifier = Modifier.padding(horizontal = 5.dp)
             )
 
@@ -91,7 +92,7 @@ fun RecipiesBox() {
                 border = ButtonDefaults.outlinedButtonBorder(false),
                 shape = RoundedCornerShape(12.dp)
             ) {
-                Text("Ver receta", fontWeight = FontWeight.Bold)
+                Text("Ver receta")
             }
         }
     }

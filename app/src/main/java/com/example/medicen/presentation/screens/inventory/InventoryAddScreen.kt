@@ -18,14 +18,17 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Inventory
 import androidx.compose.material.icons.filled.Inventory2
 import androidx.compose.material.icons.filled.Remove
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -35,16 +38,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.medicen.presentation.components.CustomTextField
+import com.example.medicen.ui.theme.ParkLane
+import com.example.medicen.ui.theme.backgroundColor
 import com.example.medicen.ui.theme.greenBold
 import com.example.medicen.ui.theme.primaryColor
 
 @Composable
-fun InventoryAddScreen(modifier: Modifier = Modifier) {
+fun InventoryAddScreen(
+    modifier: Modifier = Modifier,
+    onSaveProduct: () -> Unit = {}
+) {
 
     var text by remember { mutableStateOf("") }
     val filters =
@@ -56,16 +65,22 @@ fun InventoryAddScreen(modifier: Modifier = Modifier) {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(backgroundColor)
             .padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
+        Spacer(Modifier.weight(0.3f))
+        Text(
+            "Añadir al inventario",
+            fontFamily = ParkLane,
+            fontSize = 28.sp,
+            fontWeight = FontWeight.Bold
+        )
         Text(
             "Nombre del producto",
             color = Color.Black,
             fontSize = 18.sp,
-            fontWeight = FontWeight.Medium,
-
-            )
+        )
         CustomTextField(
             value = text,
             onValueChanger = { text = it },
@@ -78,8 +93,8 @@ fun InventoryAddScreen(modifier: Modifier = Modifier) {
             "Categoria",
             color = Color.Black,
             fontSize = 18.sp,
-            fontWeight = FontWeight.Medium,
-        )
+
+            )
 
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
@@ -123,7 +138,10 @@ fun InventoryAddScreen(modifier: Modifier = Modifier) {
                 }
             }
         }
-        Row(modifier = Modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(5.dp)
+        ) {
             Column(
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
@@ -131,18 +149,18 @@ fun InventoryAddScreen(modifier: Modifier = Modifier) {
                     "Cantidad",
                     color = Color.Black,
                     fontSize = 18.sp,
-                    fontWeight = FontWeight.Medium,
-                )
+
+                    )
                 Row(
                     modifier = Modifier
                         .width(180.dp)
-                        .height(60.dp)
+                        .height(56.dp)
                         .border(
                             1.dp,
                             color = Color.Black,
-                            shape = RoundedCornerShape(16.dp),
+                            shape = RoundedCornerShape(8.dp),
                         )
-                        .background(Color.White, shape = RoundedCornerShape(16.dp))
+                        .background(Color.White, shape = RoundedCornerShape(8.dp))
                         .padding(8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
@@ -154,7 +172,7 @@ fun InventoryAddScreen(modifier: Modifier = Modifier) {
                         Icon(
                             imageVector = Icons.Default.Remove,
                             contentDescription = null,
-                            tint = Color.Black  ,
+                            tint = Color.Black,
                             modifier = Modifier.size(24.dp)
                         )
                     }
@@ -195,11 +213,61 @@ fun InventoryAddScreen(modifier: Modifier = Modifier) {
                         )
                     }
                 }
-
             }
-        }
+            Column(
+                verticalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                Text(
+                    "Caducidad",
+                    color = Color.Black,
+                    fontSize = 18.sp,
 
+                    )
+                CustomTextField(
+                    text,
+                    onValueChanger = { text = it },
+                    placeholder = "mm/dd/yyy",
+                    icon = Icons.Default.CalendarMonth
+                )
+            }
+
+        }
+        Text(
+            "Icono",
+            color = Color.Black,
+            fontSize = 18.sp,
+
+            )
+        CustomTextField(
+            text,
+            onValueChanger = { text = it },
+            placeholder = "Elige un icono",
+            icon = Icons.Default.CalendarMonth,
+            modifier = Modifier.size(width = 180.dp, height = 56.dp)
+        )
+
+        OutlinedButton(
+            onClick = {
+                onSaveProduct()
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(70.dp)
+                .padding(horizontal = 50.dp, vertical = 10.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = primaryColor,
+                contentColor = Color.White,
+                disabledContentColor = Color.Gray,
+                disabledContainerColor = Color.White
+            ),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Text("Guardar Producto", fontSize = 16.sp)
+        }
+        Spacer(Modifier.weight(1f))
     }
+
+
 }
 
 @Preview(showBackground = true)

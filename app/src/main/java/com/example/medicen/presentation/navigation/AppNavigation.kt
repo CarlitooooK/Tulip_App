@@ -9,7 +9,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.medicen.presentation.screens.auth.login.LoginScreen
+import com.example.medicen.presentation.screens.auth.recoveryPassword.RecoveryPassswordScreen
 import com.example.medicen.presentation.screens.auth.register.RegisterScreen
+import com.example.medicen.presentation.screens.inventory.InventoryAddScreen
 import com.example.medicen.presentation.screens.main.MainScreen
 
 @Composable
@@ -30,7 +32,8 @@ fun AppNavigation() {
                         popUpTo(AppScreens.LoginScreen.route) { inclusive = true }
                     }
                 },
-                onNavigateToRegister = { navController.navigate(AppScreens.RegisterScreen.route) }
+                onNavigateToRegister = { navController.navigate(AppScreens.RegisterScreen.route) },
+                onRecoveryPassword = {navController.navigate(AppScreens.RecoveryPasswordScreen.route)}
             )
         }
         composable(AppScreens.RegisterScreen.route) {
@@ -45,6 +48,22 @@ fun AppNavigation() {
                 }
             )
         }
+
+        composable(AppScreens.RecoveryPasswordScreen.route){
+            RecoveryPassswordScreen(
+                onRecoverySend = {navController.popBackStack()}
+            )
+        }
+
+        composable(AppScreens.InventoryAddScreen.route) {
+            InventoryAddScreen(
+                onSaveProduct = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+
         composable(AppScreens.MainScreen.route) {
             MainScreen(
                 rootNavController = navController

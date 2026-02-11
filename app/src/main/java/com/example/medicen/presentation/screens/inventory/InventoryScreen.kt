@@ -45,8 +45,11 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.medicen.presentation.components.CustomSearchBar
 import com.example.medicen.presentation.components.InventoryItem
+import com.example.medicen.ui.theme.ParkLane
 import com.example.medicen.ui.theme.backgroundColor
 
 import com.example.medicen.ui.theme.expireColor
@@ -58,9 +61,12 @@ import com.example.medicen.ui.theme.secondaryColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun InventoryScreen() {
-    
-    val filters = listOf("Todos","Por caducar","Caducados","Lácteos", "Frutas", "Verduras", "Bebidas")
+fun InventoryScreen(
+    navController: NavController = rememberNavController()
+) {
+
+    val filters =
+        listOf("Todos", "Por caducar", "Caducados", "Lácteos", "Frutas", "Verduras", "Bebidas")
     var selectedFilter by remember { mutableStateOf("Todos") }
 
     Column(
@@ -76,9 +82,17 @@ fun InventoryScreen() {
             horizontalArrangement = Arrangement.Absolute.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text("Mi Inventario", fontSize = 26.sp, color = Color.Black, fontWeight = FontWeight.Bold)
+            Text(
+                "Mi Inventario",
+                fontSize = 28.sp,
+                fontFamily = ParkLane,
+                color = Color.Black,
+                fontWeight = FontWeight.Bold
+            )
             FloatingActionButton(
-                onClick = {},
+                onClick = {
+                    navController.navigate("inventory_add_screen")
+                },
                 shape = CircleShape,
                 modifier = Modifier.size(40.dp),
                 containerColor = primaryColor,
@@ -89,13 +103,13 @@ fun InventoryScreen() {
         }
 
 
-
         // Contenedor principal de la búsqueda
         CustomSearchBar("Buscar en el inventario")
 
 
         LazyRow(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(horizontal = 20.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
@@ -104,10 +118,10 @@ fun InventoryScreen() {
                     FilterChip(
                         modifier = Modifier.padding(horizontal = 5.dp),
                         selected = (filter == selectedFilter),
-                        onClick = {selectedFilter = filter},
-                        label = {Text(filter)},
+                        onClick = { selectedFilter = filter },
+                        label = { Text(filter) },
                         leadingIcon = {
-                            if(filter == selectedFilter){
+                            if (filter == selectedFilter) {
                                 Icon(
                                     imageVector = Icons.Default.Check,
                                     contentDescription = null,
@@ -123,7 +137,7 @@ fun InventoryScreen() {
                             selectedLeadingIconColor = Color.White,
                             disabledContainerColor = Color.White,
 
-                        ),
+                            ),
                         border = FilterChipDefaults.filterChipBorder(
                             enabled = false,
                             selected = false
@@ -138,12 +152,34 @@ fun InventoryScreen() {
             }
         }
 
-        Text("DESPENSA (12)", color = Color.Black, fontSize = 16.sp, modifier = Modifier.padding(start = 20.dp ), fontWeight = FontWeight.Medium)
+        Text(
+            "DESPENSA (12)",
+            color = Color.Black,
+            fontSize = 16.sp,
+            fontFamily = ParkLane,
+            modifier = Modifier.padding(start = 20.dp),
+            fontWeight = FontWeight.Medium
+        )
         LazyColumn(modifier = Modifier.padding(20.dp)) {
-            items(1){
-                InventoryItem("Arroz Integral","Caduca: 20 Nov", colorExpire = primaryColor, icon = Icons.Default.RiceBowl)
-                InventoryItem("Cafe de Grano","Consumir pronto", colorExpire = secondaryColor, icon = Icons.Default.FreeBreakfast)
-                InventoryItem("Helado de Litro","Caduca: Mañana", colorExpire = expireColor, icon = Icons.Default.Icecream)
+            items(1) {
+                InventoryItem(
+                    "Arroz Integral",
+                    "Caduca: 20 Nov",
+                    colorExpire = primaryColor,
+                    icon = Icons.Default.RiceBowl
+                )
+                InventoryItem(
+                    "Cafe de Grano",
+                    "Consumir pronto",
+                    colorExpire = secondaryColor,
+                    icon = Icons.Default.FreeBreakfast
+                )
+                InventoryItem(
+                    "Helado de Litro",
+                    "Caduca: Mañana",
+                    colorExpire = expireColor,
+                    icon = Icons.Default.Icecream
+                )
             }
         }
     }

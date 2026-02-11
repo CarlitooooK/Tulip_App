@@ -47,6 +47,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.medicen.presentation.components.CustomTextField
+import com.example.medicen.ui.theme.ParkLane
 import com.example.medicen.ui.theme.backgroundColor
 import com.example.medicen.ui.theme.primaryColor
 
@@ -90,8 +91,9 @@ fun RegisterScreen(
 
 
         Text(
-            "Registro",
-            fontSize = 34.sp,
+            "Registrate",
+            fontSize = 38.sp,
+            fontFamily = ParkLane,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
             color = Color.Black,
@@ -99,7 +101,8 @@ fun RegisterScreen(
         )
         Text(
             "Empieza a organizar tu despensa de\n forma sencilla y eficiente",
-            fontSize = 14.sp,
+            fontSize = 18.sp,
+            fontFamily = ParkLane,
             textAlign = TextAlign.Center,
             color = Color.Gray,
             modifier = Modifier.padding(vertical = 20.dp)

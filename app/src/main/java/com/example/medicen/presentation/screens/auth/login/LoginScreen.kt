@@ -37,6 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.medicen.presentation.components.CustomTextField
+import com.example.medicen.ui.theme.ParkLane
 import com.example.medicen.ui.theme.backgroundColor
 import com.example.medicen.ui.theme.primaryColor
 
@@ -44,7 +45,8 @@ import com.example.medicen.ui.theme.primaryColor
 fun LoginScreen(
     modifier: Modifier = Modifier,
     onLoginSuccess: () -> Unit = {},
-    onNavigateToRegister: () -> Unit = {}
+    onNavigateToRegister: () -> Unit = {},
+    onRecoveryPassword: () -> Unit = {}
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -80,7 +82,8 @@ fun LoginScreen(
 
         Text(
             "Bienvenido",
-            fontSize = 34.sp,
+            fontSize = 38.sp,
+            fontFamily = ParkLane,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
             color = Color.Black,
@@ -88,7 +91,8 @@ fun LoginScreen(
         )
         Text(
             "Gestiona tu despensa de forma\ninteligente",
-            fontSize = 14.sp,
+            fontSize = 18.sp,
+            fontFamily = ParkLane,
             textAlign = TextAlign.Center,
             color = Color.Black,
             modifier = Modifier.padding(10.dp)
@@ -98,7 +102,7 @@ fun LoginScreen(
         Text(
             "Correo Electronico",
             modifier = Modifier
-                .padding(start = 20.dp, top = 40.dp)
+                .padding(start = 40.dp, top = 40.dp)
                 .fillMaxWidth(),
             fontSize = 16.sp,
             color = Color.Black
@@ -112,14 +116,14 @@ fun LoginScreen(
             icon = Icons.Filled.Email,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 10.dp)
+                .padding(horizontal = 40.dp, vertical = 10.dp)
         )
 
 
         Text(
             "Contraseña",
             modifier = Modifier
-                .padding(start = 20.dp, top = 10.dp)
+                .padding(start = 40.dp, top = 10.dp)
                 .fillMaxWidth(),
             fontSize = 16.sp,
             color = Color.Black
@@ -131,7 +135,9 @@ fun LoginScreen(
             { password = it },
             "Minimo 8 caracteres",
             icon = Icons.Filled.Password,
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 10.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 40.dp, vertical = 10.dp)
         )
 
 
@@ -139,7 +145,8 @@ fun LoginScreen(
             "¿Olvidaste tu contraseña?",
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 10.dp, end = 30.dp),
+                .padding(top = 10.dp, end = 30.dp)
+                .clickable(onClick = { onRecoveryPassword() }),
             fontSize = 16.sp,
             textAlign = TextAlign.End,
             color = primaryColor,
@@ -151,14 +158,14 @@ fun LoginScreen(
             onClick = { onLoginSuccess() },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(30.dp)
+                .padding(40.dp)
                 .height(50.dp),
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(16.dp),
             colors = ButtonDefaults.outlinedButtonColors(
                 containerColor = primaryColor,
                 disabledContainerColor = Color.Gray
 
-                ),
+            ),
             enabled = !password.isEmpty() && !email.isEmpty()
         ) {
             Text(

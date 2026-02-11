@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.example.medicen.presentation.components.CustomCard
 import com.example.medicen.presentation.components.ExpireItem
 import com.example.medicen.presentation.components.StockItem
+import com.example.medicen.ui.theme.ParkLane
 import com.example.medicen.ui.theme.backgroundColor
 import com.example.medicen.ui.theme.expireColor
 import com.example.medicen.ui.theme.expireSoonColor
@@ -45,13 +46,15 @@ fun DashboardScreen(modifier: Modifier = Modifier) {
 
         Text(
             "Bienvenido Carlo,",
-            fontSize = 18.sp,
+            fontSize = 22.sp,
+            fontFamily = ParkLane,
             color = Color.Black,
             modifier = Modifier.padding(top = 10.dp, start = 24.dp)
         )
         Text(
             "Mi Despensa",
-            fontSize = 24.sp,
+            fontSize = 28.sp,
+            fontFamily = ParkLane,
             color = Color.Black,
             modifier = Modifier.padding(start = 28.dp, top = 10.dp),
             fontWeight = FontWeight.Bold
@@ -82,7 +85,8 @@ fun DashboardScreen(modifier: Modifier = Modifier) {
         Spacer(Modifier.height(20.dp))
         Text(
             "Próximos a Caducar",
-            fontSize = 20.sp,
+            fontSize = 22.sp,
+            fontFamily = ParkLane,
             color = Color.Black,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier.padding(start = 22.dp)
@@ -96,7 +100,8 @@ fun DashboardScreen(modifier: Modifier = Modifier) {
 
         Text(
             "Bajo Stock",
-            fontSize = 20.sp,
+            fontSize = 22.sp,
+            fontFamily = ParkLane,
             color = Color.Black,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier.padding(start = 22.dp)

@@ -83,7 +83,7 @@ fun InventoryItem(title: String, expireDate: String, colorExpire: Color, icon: I
                 text = title,
                 color = Color.Black,
                 fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
+                fontWeight = FontWeight.Medium,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )

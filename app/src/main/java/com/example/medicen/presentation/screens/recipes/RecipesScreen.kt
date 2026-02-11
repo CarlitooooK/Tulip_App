@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import com.example.medicen.presentation.components.CustomFilterButton
 import com.example.medicen.presentation.components.CustomSearchBar
 import com.example.medicen.presentation.components.RecipiesBox
+import com.example.medicen.ui.theme.ParkLane
 import com.example.medicen.ui.theme.backgroundColor
 import com.example.medicen.ui.theme.primaryColor
 
@@ -51,24 +52,21 @@ fun RecipesScreen() {
             .background(backgroundColor),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Text(
-                "Hora de Cocinar",
-                modifier = Modifier.padding(top=16.dp, bottom = 10.dp),
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                color = Color.Black
-                )
-        }
+
+        Text(
+            "Mis recetas",
+            modifier = Modifier.padding(start = 20.dp, top = 20.dp),
+            fontSize = 28.sp,
+            fontFamily = ParkLane,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black
+        )
+
         CustomSearchBar("Buscar receta")
-        
+
         LazyRow(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(horizontal = 20.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
@@ -77,10 +75,10 @@ fun RecipesScreen() {
                     FilterChip(
                         modifier = Modifier.padding(horizontal = 5.dp),
                         selected = (filter == selectedFilter),
-                        onClick = {selectedFilter = filter},
-                        label = {Text(filter)},
+                        onClick = { selectedFilter = filter },
+                        label = { Text(filter) },
                         leadingIcon = {
-                            if(filter == selectedFilter){
+                            if (filter == selectedFilter) {
                                 Icon(
                                     imageVector = Icons.Default.Check,
                                     contentDescription = null,
@@ -115,12 +113,13 @@ fun RecipesScreen() {
             "Tus Recetas: ",
             fontWeight = FontWeight.SemiBold,
             color = Color.Black,
-            fontSize = 20.sp,
+            fontSize = 22.sp,
+            fontFamily = ParkLane,
             modifier = Modifier.padding(horizontal = 20.dp)
         )
 
         LazyColumn(modifier = Modifier.padding(20.dp)) {
-            items(3){
+            items(3) {
                 RecipiesBox()
             }
         }
